@@ -20,10 +20,5 @@ public class MessageDto {
 	private String image;
 
 	private LocalDateTime time;
-	
-//	private User userDto;
-	
-//	private Chat chatDto;
-
 
 }

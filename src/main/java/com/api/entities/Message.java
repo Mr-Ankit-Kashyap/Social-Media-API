@@ -25,21 +25,19 @@ public class Message {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String content;
-	
+
 	private String image;
-	
+
 	private LocalDateTime time;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "user_Id")
 	private User user;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "chat_Id")
 	private Chat chat;
-	
-	
-	
+
 }
