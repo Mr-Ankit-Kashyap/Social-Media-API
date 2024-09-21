@@ -9,13 +9,12 @@ import org.springframework.data.repository.query.Param;
 import com.api.entities.Chat;
 import com.api.entities.User;
 
-
 public interface ChatRepository extends JpaRepository<Chat, Long> {
 
-	@Query(value = "SELECT * FROM Chat WHERE username=:username " , nativeQuery = true)
+	@Query("SELECT c FROM Chat c WHERE c.username = :username")
 	List<Chat> findChatsByUsername(@Param("username") String username);
 
 	@Query("select c from Chat c Where :user Member of c.users And :reqUser Member of c.users")
-	Chat findChatByUsername(@Param("user") User reqUsername, @Param("reqUser") User chatUsername);
+	Chat findChatByUser(@Param("user") User reqUser, @Param("reqUser") User chatUser);
 
 }

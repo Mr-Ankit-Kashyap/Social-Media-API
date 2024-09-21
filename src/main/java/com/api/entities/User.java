@@ -1,7 +1,9 @@
 package com.api.entities;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -74,6 +76,9 @@ public class User implements UserDetails {
 
 	@OneToMany(mappedBy = "user")
 	private Set<Comment> comments = new HashSet<>();
+	
+	@OneToMany(mappedBy = "user")
+	private List<Message> messages = new ArrayList<>();
 
 	@ManyToMany
 	@JoinTable(name = "saved_Post")
@@ -82,6 +87,10 @@ public class User implements UserDetails {
 	@ManyToMany
 	@JoinTable(name = "saved_Reel")
 	private Set<Reel> savedReel = new HashSet<>();
+	
+	@ManyToMany
+	@JoinTable(name = "user_chat", joinColumns = @JoinColumn(name = "user_Id"), inverseJoinColumns = @JoinColumn(name = "chat_Id"))
+	private List<Chat> chats = new ArrayList<>();
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

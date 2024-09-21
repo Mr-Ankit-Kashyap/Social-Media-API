@@ -1,6 +1,8 @@
 package com.api.dtos;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.validator.constraints.Length;
@@ -48,6 +50,10 @@ public class UserDto {
 	private Set<PostDto> posts = new HashSet<>();
 
 	private Set<ReelDto> reels = new HashSet<>();
+
+	private Set<StoryDto> stories = new HashSet<>();
+
+	private List<ChatDto> chats = new ArrayList<>();
 
 	@JsonIgnore
 	public String getPassword() {

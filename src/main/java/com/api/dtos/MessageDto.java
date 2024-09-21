@@ -1,10 +1,6 @@
 package com.api.dtos;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.api.entities.Message;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,18 +11,19 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChatDto {
+public class MessageDto {
 
 	private Long id;
-	
-	private String username;
 
-	private String chatUsername;
+	private String content;
 
-	private String chat_image;
+	private String image;
 
 	private LocalDateTime time;
 	
-	private List<Message> messages = new ArrayList<>();
+//	private User userDto;
+	
+//	private Chat chatDto;
+
 
 }
