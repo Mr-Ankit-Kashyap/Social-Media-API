@@ -7,9 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.dtos.ChatDto;
@@ -31,12 +31,11 @@ public class ChatController {
 	}
 
 	@PostMapping("/")
-	public ResponseEntity<ChatDto> createChat(@RequestParam String chatUsername,
+	public ResponseEntity<ChatDto> createChat(@RequestBody ChatDto chatDto,
 			@RequestHeader("Authorization") String jwt) {
-		UserDto reqUserDto = this.userService.findUserByJwt(jwt);
-		this.userService.findUserByUsername(chatUsername);
-		ChatDto chatDto = this.chatService.createChat(reqUserDto.getUsername(), chatUsername);
-		return new ResponseEntity<ChatDto>(chatDto, HttpStatus.CREATED);
+		UserDto reqUser = this.userService.findUserByJwt(jwt);
+		ChatDto createChat = this.chatService.createChat(reqUser.getUsername(), chatDto.getChatUsername());
+		return new ResponseEntity<ChatDto>(createChat, HttpStatus.CREATED);
 	}
 
 	@GetMapping("/")
@@ -47,7 +46,7 @@ public class ChatController {
 	}
 
 	@GetMapping("/{chatId}")
-	public ResponseEntity<ChatDto> createChat(@RequestHeader("Authorization") String jwt, @PathVariable Long chatId) {
+	public ResponseEntity<ChatDto> getChat(@RequestHeader("Authorization") String jwt, @PathVariable Long chatId) {
 		this.userService.findUserByJwt(jwt);
 		ChatDto chatDto = this.chatService.findChatById(chatId);
 		return new ResponseEntity<ChatDto>(chatDto, HttpStatus.CREATED);
